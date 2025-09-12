@@ -6,22 +6,21 @@
   <title>Raquel — Half century | RSVP</title>
   <meta name="description" content="Confirmação de presença — Aniversário de 50 anos da Raquel (27/09/2025 às 17h)" />
 
-<!-- Open Graph (WhatsApp / FB / Telegram) -->
-<meta property="og:site_name" content="Raquel — Half Century" />
-<meta property="og:title" content="Raquel — Half century | RSVP" />
-<meta property="og:description" content="Confirmação de presença — 27/09/2025 às 17h • Residência da Laura, Av. Dolor Barreira, 1350 — Dunas" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://confirmacaofesta-sudo.github.io/Raquel-Half-Century/" />
-<meta property="og:image" content="https://confirmacaofesta-sudo.github.io/Raquel-Half-Century/capa.png" />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
+  <!-- Open Graph (WhatsApp / FB / Telegram) -->
+  <meta property="og:site_name" content="Raquel — Half Century" />
+  <meta property="og:title" content="Raquel — Half century | RSVP" />
+  <meta property="og:description" content="Confirmação de presença — 27/09/2025 às 17h • Residência da Laura, Av. Dolor Barreira, 1350 — Dunas" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://confirmacaofesta-sudo.github.io/Raquel-Half-Century/" />
+  <meta property="og:image" content="https://confirmacaofesta-sudo.github.io/Raquel-Half-Century/capa.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
 
-<!-- Twitter / X -->
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Raquel — Half century | RSVP" />
-<meta name="twitter:description" content="Confirmação de presença — 27/09/2025 às 17h • Residência da Laura, Av. Dolor Barreira, 1350 — Dunas" />
-<meta name="twitter:image" content="https://confirmacaofesta-sudo.github.io/Raquel-Half-Century/capa.png" />
-
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Raquel — Half century | RSVP" />
+  <meta name="twitter:description" content="Confirmação de presença — 27/09/2025 às 17h • Residência da Laura, Av. Dolor Barreira, 1350 — Dunas" />
+  <meta name="twitter:image" content="https://confirmacaofesta-sudo.github.io/Raquel-Half-Century/capa.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -61,30 +60,50 @@
     .panel{background:var(--panel);border:1px solid rgba(207,167,100,.35);border-radius:20px;padding:24px;box-shadow:0 10px 30px rgba(0,0,0,.3)}
     footer{padding:24px 0;border-top:1px solid rgba(207,167,100,.35);background:rgba(0,0,0,.35);text-align:center}
     input[type=text]{padding:10px 12px;border-radius:12px;border:1px solid rgba(207,167,100,.45);background:transparent;color:var(--text);font-family:'EB Garamond',serif;font-size:18px}
-    /* Sucesso e animações */
-.success-wrap{ text-align:center; padding:32px 12px }
-.success-title{ font-size:32px; margin:8px 0; color:var(--gold2); font-family:'EB Garamond',serif; }
-.success-sub{ color:rgba(245,230,200,.9); font-size:18px; margin:4px 0 0 }
-.big-check{
-  width:80px;height:80px;margin:0 auto 12px;border-radius:50%;
-  border:2px solid var(--gold2); display:grid; place-items:center; font-size:42px; color:var(--gold2);
-  box-shadow:0 0 0 6px rgba(225,184,102,.15);
-}
-.fade-out{ animation:fadeOut .28s ease forwards }
-.fade-in{ animation:fadeIn .32s ease forwards }
-@keyframes fadeOut{ from{opacity:1;transform:scale(1)} to{opacity:.6;transform:scale(.98)} }
-@keyframes fadeIn{ from{opacity:.6;transform:scale(.98)} to{opacity:1;transform:scale(1)} }
 
+    /* ===== Forma orgânica no topo (responsiva) ===== */
+    .shape-top{
+      position:absolute;
+      top:0;
+      left:50%;
+      transform:translateX(-50%);
+      width:min(1200px, 110vw);
+      height:auto;
+      pointer-events:none;
+      z-index:0;
+      filter: drop-shadow(0 12px 20px rgba(0,0,0,.35));
+    }
+    .hero .container{ position:relative; z-index:1; }
+    @media (max-width: 480px){
+      .shape-top{ width:125vw; }
+    }
+
+    /* ===== Sucesso e animações ===== */
+    .success-wrap{ text-align:center; padding:32px 12px }
+    .success-title{ font-size:32px; margin:8px 0; color:var(--gold2); font-family:'EB Garamond',serif; }
+    .success-sub{ color:rgba(245,230,200,.9); font-size:18px; margin:4px 0 0 }
+    .big-check{ width:80px;height:80px;margin:0 auto 12px;border-radius:50%; border:2px solid var(--gold2);
+      display:grid; place-items:center; font-size:42px; color:var(--gold2); box-shadow:0 0 0 6px rgba(225,184,102,.15); }
+    .fade-out{ animation:fadeOut .28s ease forwards }
+    .fade-in{ animation:fadeIn .32s ease forwards }
+    @keyframes fadeOut{ from{opacity:1;transform:scale(1)} to{opacity:.6;transform:scale(.98)} }
+    @keyframes fadeIn{ from{opacity:.6;transform:scale(.98)} to{opacity:1;transform:scale(1)} }
   </style>
 </head>
 <body>
   <header class="hero">
     <div class="vein" style="top:24px"></div>
+
+    <!-- Forma orgânica decorativa -->
+    <img src="shape-top.png" alt="" aria-hidden="true" class="shape-top" loading="eager" />
+
     <div class="vein bottom"></div>
 
     <div class="container center" style="padding: 70px 0 10px;">
-<img src="logo-raquel.png" alt="Raquel" style="max-width:420px;width:100%;height:auto;margin:0 auto;display:block">
-<div class="script">Half century</div>
+      <!-- Logo (imagem) -->
+      <img src="logo-raquel.png" alt="Raquel" style="max-width:420px;width:100%;height:auto;margin:0 auto;display:block">
+      <div class="script">Half century</div>
+
       <p class="muted" id="event-date"></p>
       <p class="muted" id="event-location"></p>
       <div class="counter" id="counter"></div>
@@ -217,22 +236,21 @@ function initForm() {
     try{
       await postToSheet(payload);
 
-// troca o conteúdo do painel por uma mensagem de sucesso
-const panel = document.getElementById("rsvp-section");
-panel.classList.add("fade-out");
-setTimeout(() => {
-  panel.innerHTML = `
-    <div class="success-wrap">
-      <div class="big-check">✓</div>
-      <h2 class="success-title">Obrigada! 🎉</h2>
-      <p class="success-sub">Sua resposta foi registrada.</p>
-    </div>
-  `;
-  panel.classList.remove("fade-out");
-  panel.classList.add("fade-in");
-  // rola para o topo para destacar o cabeçalho e a contagem regressiva
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}, 280);
+      // animação de sucesso: remove formulário e mostra cartão "Obrigada!"
+      const panel = document.getElementById("rsvp-section");
+      panel.classList.add("fade-out");
+      setTimeout(() => {
+        panel.innerHTML = `
+          <div class="success-wrap">
+            <div class="big-check">✓</div>
+            <h2 class="success-title">Obrigada! 🎉</h2>
+            <p class="success-sub">Sua resposta foi registrada.</p>
+          </div>
+        `;
+        panel.classList.remove("fade-out");
+        panel.classList.add("fade-in");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }, 280);
 
     }catch(err){
       console.error(err);
