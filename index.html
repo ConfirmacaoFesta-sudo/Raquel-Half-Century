@@ -61,23 +61,6 @@
     footer{padding:24px 0;border-top:1px solid rgba(207,167,100,.35);background:rgba(0,0,0,.35);text-align:center}
     input[type=text]{padding:10px 12px;border-radius:12px;border:1px solid rgba(207,167,100,.45);background:transparent;color:var(--text);font-family:'EB Garamond',serif;font-size:18px}
 
-    /* ===== Forma orgânica no topo (responsiva) ===== */
-    .shape-top{
-      position:absolute;
-      top:0;
-      left:50%;
-      transform:translateX(-50%);
-      width:min(1200px, 110vw);
-      height:auto;
-      pointer-events:none;
-      z-index:0;
-      filter: drop-shadow(0 12px 20px rgba(0,0,0,.35));
-    }
-    .hero .container{ position:relative; z-index:1; }
-    @media (max-width: 480px){
-      .shape-top{ width:125vw; }
-    }
-
     /* ===== Sucesso e animações ===== */
     .success-wrap{ text-align:center; padding:32px 12px }
     .success-title{ font-size:32px; margin:8px 0; color:var(--gold2); font-family:'EB Garamond',serif; }
@@ -93,10 +76,6 @@
 <body>
   <header class="hero">
     <div class="vein" style="top:24px"></div>
-
-    <!-- Forma orgânica decorativa -->
-    <img src="shape-top.png" alt="" aria-hidden="true" class="shape-top" loading="eager" />
-
     <div class="vein bottom"></div>
 
     <div class="container center" style="padding: 70px 0 10px;">
@@ -163,7 +142,6 @@ const EVENT = {
   dateISO: "2025-09-27T17:00:00-03:00",
   addressLabel: "Residência da Laura – Av. Dolor Barreira, 1350 – Dunas, Fortaleza/CE",
   mapsQuery: "Residência da Laura, Av. Dolor Barreira 1350, Dunas, Fortaleza",
-  // URL do seu Google Apps Script publicado como Web App:
   googleScriptURL: "https://script.google.com/macros/s/AKfycbyzxQgrFkLUUZRag_nWyw5fDqsE-Nf5jsKjREKkLi0ajFXyCD-os-nW9ia7Q8lhqT45/exec"
 };
 
