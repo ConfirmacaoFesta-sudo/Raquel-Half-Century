@@ -61,6 +61,20 @@
     .panel{background:var(--panel);border:1px solid rgba(207,167,100,.35);border-radius:20px;padding:24px;box-shadow:0 10px 30px rgba(0,0,0,.3)}
     footer{padding:24px 0;border-top:1px solid rgba(207,167,100,.35);background:rgba(0,0,0,.35);text-align:center}
     input[type=text]{padding:10px 12px;border-radius:12px;border:1px solid rgba(207,167,100,.45);background:transparent;color:var(--text);font-family:'EB Garamond',serif;font-size:18px}
+    /* Sucesso e animações */
+.success-wrap{ text-align:center; padding:32px 12px }
+.success-title{ font-size:32px; margin:8px 0; color:var(--gold2); font-family:'EB Garamond',serif; }
+.success-sub{ color:rgba(245,230,200,.9); font-size:18px; margin:4px 0 0 }
+.big-check{
+  width:80px;height:80px;margin:0 auto 12px;border-radius:50%;
+  border:2px solid var(--gold2); display:grid; place-items:center; font-size:42px; color:var(--gold2);
+  box-shadow:0 0 0 6px rgba(225,184,102,.15);
+}
+.fade-out{ animation:fadeOut .28s ease forwards }
+.fade-in{ animation:fadeIn .32s ease forwards }
+@keyframes fadeOut{ from{opacity:1;transform:scale(1)} to{opacity:.6;transform:scale(.98)} }
+@keyframes fadeIn{ from{opacity:.6;transform:scale(.98)} to{opacity:1;transform:scale(1)} }
+
   </style>
 </head>
 <body>
@@ -81,7 +95,7 @@
   </header>
 
   <main class="container" style="padding: 24px 0 40px">
-    <section class="panel">
+    <section class="panel" id="rsvp-section">
       <h2 class="center" style="font-family:'EB Garamond',serif;margin:0 0 4px;font-size:28px">Confirme sua presença</h2>
       <p class="center muted" style="margin:0 0 18px">Responda às perguntas abaixo.</p>
 
@@ -202,7 +216,24 @@ function initForm() {
     document.getElementById("status").textContent = "Enviando sua confirmação...";
     try{
       await postToSheet(payload);
-      document.getElementById("status").textContent = "Obrigada! 🎉 Sua resposta foi registrada.";
+
+// troca o conteúdo do painel por uma mensagem de sucesso
+const panel = document.getElementById("rsvp-section");
+panel.classList.add("fade-out");
+setTimeout(() => {
+  panel.innerHTML = `
+    <div class="success-wrap">
+      <div class="big-check">✓</div>
+      <h2 class="success-title">Obrigada! 🎉</h2>
+      <p class="success-sub">Sua resposta foi registrada.</p>
+    </div>
+  `;
+  panel.classList.remove("fade-out");
+  panel.classList.add("fade-in");
+  // rola para o topo para destacar o cabeçalho e a contagem regressiva
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}, 280);
+
     }catch(err){
       console.error(err);
       document.getElementById("status").textContent = "Não foi possível enviar agora. Confirme se a URL do Apps Script é /exec e está com acesso público (Qualquer pessoa).";
