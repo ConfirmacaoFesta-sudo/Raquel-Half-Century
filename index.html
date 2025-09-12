@@ -4,7 +4,24 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Raquel — Half century | RSVP</title>
-  <meta name="description" content="Confirmação de presença — Aniversário de 50 anos da Raquel" />
+  <meta name="description" content="Confirmação de presença — Aniversário de 50 anos da Raquel (27/09/2025 às 17h)" />
+
+  <!-- Open Graph (WhatsApp/FB/Telegram) -->
+  <meta property="og:site_name" content="Raquel — Half Century" />
+  <meta property="og:title" content="Raquel — Half century | RSVP" />
+  <meta property="og:description" content="Confirmação de presença — 27/09/2025 às 17h • Residência da Laura, Av. Dolor Barreira, 1350 — Dunas" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://confirmacaofesta-sudo.github.io/Raquel-Half-Century/" />
+  <meta property="og:image" content="https://confirmacaofesta-sudo.github.io/Raquel-Half-Century/capa.jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Raquel — Half century | RSVP" />
+  <meta name="twitter:description" content="Confirmação de presença — 27/09/2025 às 17h • Residência da Laura, Av. Dolor Barreira, 1350 — Dunas" />
+  <meta name="twitter:image" content="https://confirmacaofesta-sudo.github.io/Raquel-Half-Century/capa.jpeg" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
@@ -45,158 +62,6 @@
   </style>
 </head>
 <body>
-  <header class="hero">
-    <div class="vein" style="top:24px"></div>
-    <div class="vein bottom"></div>
-
-    <div class="container center" style="padding: 70px 0 10px;">
-      <h1>RAQUEL</h1>
-      <div class="script">Half century</div>
-      <p class="muted" id="event-date"></p>
-      <p class="muted" id="event-location"></p>
-      <div class="counter" id="counter"></div>
-      <div style="margin-top:16px">
-        <a id="maps" class="btn" target="_blank" rel="noreferrer">📍 Ver no Google Maps</a>
-      </div>
-    </div>
-  </header>
-
-  <main class="container" style="padding: 24px 0 40px">
-    <section class="panel">
-      <h2 class="center" style="font-family:'EB Garamond',serif;margin:0 0 4px;font-size:28px">Confirme sua presença</h2>
-      <p class="center muted" style="margin:0 0 18px">Responda às perguntas abaixo.</p>
-
-      <form id="rsvp-form" class="grid" onsubmit="return false">
-        <fieldset class="grid">
-          <legend class="muted" style="font-size:14px;letter-spacing:.05em;text-transform:uppercase">Nome</legend>
-          <input type="text" id="guest-name" placeholder="Digite seu nome e sobrenome" required>
-        </fieldset>
-
-        <fieldset class="grid">
-          <legend class="muted" style="font-size:14px;letter-spacing:.05em;text-transform:uppercase">Você vai para o Half Century?</legend>
-          <div class="grid grid-2">
-            <button type="button" class="pill" data-attend="sim">Sim</button>
-            <button type="button" class="pill" data-attend="nao">Não</button>
-          </div>
-        </fieldset>
-
-        <fieldset class="grid">
-          <legend class="muted" style="font-size:14px;letter-spacing:.05em;text-transform:uppercase">Quantos acompanhantes?</legend>
-          <div class="grid grid-3">
-            <button type="button" class="pill" data-people="0">0</button>
-            <button type="button" class="pill" data-people="1">1</button>
-            <button type="button" class="pill" data-people="2">2</button>
-          </div>
-        </fieldset>
-
-        <div class="center" style="margin-top:12px">
-          <button class="btn btn-gold" id="confirm" style="min-width:180px" disabled>Confirmar</button>
-        </div>
-        <p class="center muted" id="status" style="margin-top:12px"></p>
-      </form>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container">
-      <p>Com carinho, família e amigos da Raquel.</p>
-      <p id="share" style="opacity:.8"></p>
-    </div>
-  </footer>
-
-<script>
-// ================== CONFIG ==================
-const EVENT = {
-  title: "RAQUEL",
-  subtitle: "Half century",
-  dateISO: "2025-09-27T17:00:00-03:00",
-  addressLabel: "Residência da Laura – Av. Dolor Barreira, 1350 – Dunas, Fortaleza/CE",
-  mapsQuery: "Residência da Laura, Av. Dolor Barreira 1350, Dunas, Fortaleza",
-  googleScriptURL: "https://script.google.com/macros/s/AKfycbyzxQgrFkLUUZRag_nWyw5fDqsE-Nf5jsKjREKkLi0ajFXyCD-os-nW9ia7Q8lhqT45/exec"
-};
-
-// ============== UTILITÁRIOS & UI ==============
-function formatDateLong(date) {
-  return new Intl.DateTimeFormat("pt-BR", { weekday: "long", day: "2-digit", month: "long", year: "numeric", hour: "2-digit", minute: "2-digit" }).format(date);
-}
-function updateInfo() {
-  const d = new Date(EVENT.dateISO);
-  document.getElementById("event-date").textContent = formatDateLong(d);
-  document.getElementById("event-location").textContent = EVENT.addressLabel;
-  document.getElementById("maps").href = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(EVENT.mapsQuery);
-  document.getElementById("share").textContent = "Link: " + (location.href || "(quando publicado)");
-}
-function runCounter() {
-  const root = document.getElementById("counter");
-  function tick() {
-    const now = Date.now();
-    const target = new Date(EVENT.dateISO).getTime();
-    const diff = Math.max(0, target - now);
-    const days = Math.floor(diff / 86400000);
-    const hours = Math.floor((diff / 3600000) % 24);
-    const minutes = Math.floor((diff / 60000) % 60);
-    const seconds = Math.floor((diff / 1000) % 60);
-    root.innerHTML = ["dias","horas","min","seg"].map((label,i)=>{
-      const v = [days,hours,minutes,seconds][i];
-      return '<div class="card"><b>'+String(v).padStart(2,"0")+'</b><span style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.85">'+label+'</span></div>';
-    }).join("");
-  }
-  tick(); setInterval(tick,1000);
-}
-
-let attending = null; let people = null;
-function updateButtons() {
-  document.querySelectorAll("[data-attend]").forEach(btn => { btn.classList.toggle("active", btn.getAttribute("data-attend") === attending); });
-  document.querySelectorAll("[data-people]").forEach(btn => { btn.classList.toggle("active", Number(btn.getAttribute("data-people")) === people); });
-  const name = (document.getElementById("guest-name").value || '').trim();
-  const allFilled = name && attending !== null && people !== null;
-  document.getElementById("confirm").disabled = !allFilled;
-}
-
-async function postToSheet(payload){
-  const url = EVENT.googleScriptURL || '';
-  if(!/^https:\/\/script\.google\.com\/macros\/s\/[^/]+\/exec(?:\?.*)?$/.test(url)){
-    throw new Error('URL do Apps Script ausente ou inválida (precisa terminar com /exec).');
-  }
-  // 1) Tenta com JSON (padrão). Se o seu Apps Script não estiver com CORS liberado, o navegador pode bloquear.
-  try{
-    const resp = await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    });
-    if(!resp.ok) throw new Error('HTTP '+resp.status);
-    return true;
-  }catch(err){
-    // 2) Fallback sem CORS (envia, mas não lemos a resposta). Funciona mesmo sem cabeçalhos CORS.
-    await fetch(url, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) });
-    // Se não lançar erro, consideramos enviado.
-    return true;
-  }
-}
-
-function initForm() {
-  document.querySelectorAll("[data-attend]").forEach(btn => { btn.addEventListener("click", () => { attending = btn.getAttribute("data-attend"); updateButtons(); }); });
-  document.querySelectorAll("[data-people]").forEach(btn => { btn.addEventListener("click", () => { people = Number(btn.getAttribute("data-people")); updateButtons(); }); });
-  document.getElementById("guest-name").addEventListener("input", updateButtons);
-
-  document.getElementById("confirm").addEventListener("click", async (e) => {
-    e.preventDefault();
-    const name = (document.getElementById("guest-name").value || '').trim();
-    const payload = { Nome: name, 'Confirmado?': attending === 'sim' ? 'Sim' : 'Não', Acompanhantes: people };
-    document.getElementById("status").textContent = "Enviando sua confirmação...";
-    try{
-      await postToSheet(payload);
-      document.getElementById("status").textContent = "Obrigada! 🎉 Sua resposta foi registrada.";
-    }catch(err){
-      console.error(err);
-      document.getElementById("status").textContent = "Não foi possível enviar agora. Confirme se a URL do Apps Script é /exec e está com acesso público (Qualquer pessoa).";
-    }
-  });
-  updateButtons();
-}
-
-updateInfo(); runCounter(); initForm();
-</script>
+  <!-- resto do conteúdo do body aqui (o que já está funcionando) -->
 </body>
 </html>
