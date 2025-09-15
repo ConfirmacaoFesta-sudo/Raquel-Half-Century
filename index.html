@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Raquel — Half Century | RSVP</title>
+  <title>Raquel — Half century | RSVP</title>
   <meta name="description" content="Confirmação de presença — Aniversário de 50 anos da Raquel (27/09/2025 às 17h)" />
 
   <!-- Open Graph (WhatsApp / FB / Telegram) -->
   <meta property="og:site_name" content="Raquel — Half century" />
   <meta property="og:title" content="Raquel — Half century | RSVP" />
-  <meta property="og:description" content="Confirmação de presença — 27/09/2025 às 17h • Av. Dolor Barreira, 1350 – Dunas, Fortaleza/CE (Residência Laura)" />
+  <meta property="og:description" content="Confirmação de presença — 27/09/2025 às 17h • Av. Dolor Barreira, 1350 – Dunas, Fortaleza/CE (Residência da Laura)" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://confirmacaofesta-sudo.github.io/Raquel-Half-Century/" />
   <meta property="og:image" content="https://confirmacaofesta-sudo.github.io/Raquel-Half-Century/capa.png" />
@@ -19,7 +19,7 @@
   <!-- Twitter / X -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Raquel — Half century | RSVP" />
-  <meta name="twitter:description" content="Confirmação de presença — 27/09/2025 às 17h • Av. Dolor Barreira, 1350 – Dunas, Fortaleza/CE (Residência Laura)" />
+  <meta name="twitter:description" content="Confirmação de presença — 27/09/2025 às 17h • Av. Dolor Barreira, 1350 – Dunas, Fortaleza/CE (Residência da Laura)" />
   <meta name="twitter:image" content="https://confirmacaofesta-sudo.github.io/Raquel-Half-Century/capa.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,7 +39,7 @@
     .center{text-align:center}
     h1{font-family:'EB Garamond',serif;font-weight:600;letter-spacing:.02em;margin:0;font-size:48px}
     @media(min-width:768px){h1{font-size:64px}}
-    .script{font-family:'Great Vibes',cursive;color:var(--gold2);font-size:28px;margin-top:6px}
+    .script{font-family:'Great Vibes',cursive;color:var(--gold2);font-size:28px;margin-top:6px;letter-spacing:0.05em}
     .muted{color:rgba(245,230,200,.9)}
     .hero{position:relative;overflow:hidden;padding:80px 0 40px}
     .vein{position:absolute;left:0;right:0;height:4px;opacity:.6;background:linear-gradient(90deg, transparent, #d3a247 30%, transparent)}
@@ -87,7 +87,7 @@
       <p class="muted" id="event-location"></p>
       <div class="counter" id="counter"></div>
       <div style="margin-top:16px">
-        <a id="maps" class="btn" target="_blank" rel="noreferrer">📍 Ver no Google Maps</a>
+        <a id="maps" class="btn" target="_blank" rel="noreferrer">Ver no Google Maps</a>
       </div>
     </div>
   </header>
@@ -104,7 +104,7 @@
         </fieldset>
 
         <fieldset class="grid">
-          <legend class="muted" style="font-size:14px;letter-spacing:.05em;text-transform:uppercase">Você vai para o Half Century?</legend>
+          <legend class="muted" style="font-size:14px;letter-spacing:.05em;text-transform:uppercase">Você vai para o Half century?</legend>
           <div class="grid grid-2">
             <button type="button" class="pill" data-attend="sim">Sim</button>
             <button type="button" class="pill" data-attend="nao">Não</button>
@@ -140,30 +140,33 @@ const EVENT = {
   title: "RAQUEL",
   subtitle: "Half century",
   dateISO: "2025-09-27T17:00:00-03:00",
-  addressLabel: "Av. Dolor Barreira, 1350 – Dunas, Fortaleza/CE (Residência Laura)",
+  addressLabel: "Av. Dolor Barreira, 1350 – Dunas, Fortaleza/CE (Residência da Laura)",
   mapsQuery: "Residência da Laura, Av. Dolor Barreira 1350, Dunas, Fortaleza",
   googleScriptURL: "https://script.google.com/macros/s/AKfycbyzxQgrFkLUUZRag_nWyw5fDqsE-Nf5jsKjREKkLi0ajFXyCD-os-nW9ia7Q8lhqT45/exec"
 };
 
-// Deixa a 1ª letra maiúscula (para 'Sábado, ...')
 function capitalizeFirst(s){ return s ? s.charAt(0).toUpperCase() + s.slice(1) : s; }
 
 function formatDateLong(date) {
-  // Monta data e hora separadas para inserir "às"
   const dateStr = new Intl.DateTimeFormat("pt-BR", {
     weekday: "long", day: "2-digit", month: "long", year: "numeric"
   }).format(date);
   const timeStr = new Intl.DateTimeFormat("pt-BR", {
     hour: "2-digit", minute: "2-digit"
   }).format(date);
-  return capitalizeFirst(`${dateStr} às ${timeStr}`);
+  return "📅 " + capitalizeFirst(`${dateStr} às ${timeStr}`);
 }
 
 function updateInfo() {
   const d = new Date(EVENT.dateISO);
   document.getElementById("event-date").textContent = formatDateLong(d);
-  document.getElementById("event-location").textContent = EVENT.addressLabel;
-  document.getElementById("maps").href = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(EVENT.mapsQuery);
+
+  // endereço com emoji e negrito
+  document.getElementById("event-location").innerHTML =
+    "📍 " + EVENT.addressLabel.replace("(Residência da Laura)", "<strong>(Residência da Laura)</strong>");
+
+  document.getElementById("maps").href =
+    "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(EVENT.mapsQuery);
   document.getElementById("share").textContent = "Link: " + (location.href || "(quando publicado)");
 }
 
@@ -226,7 +229,6 @@ function initForm() {
     try{
       await postToSheet(payload);
 
-      // animação de sucesso: remove formulário e mostra cartão "Obrigada!"
       const panel = document.getElementById("rsvp-section");
       panel.classList.add("fade-out");
       setTimeout(() => {
